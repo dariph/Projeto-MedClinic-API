@@ -1,9 +1,9 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
-import { User, UserRole } from "../entities/User.js";
 import type { CreateUserDTO, UserResponseDTO } from "../dtos/UserDTO.js";
-import { AppError } from "../utils/AppError.js";
+import { User, UserRole } from "../entities/User.js";
 import { UserRepository } from "../repositories/UserRepository.js";
+import { AppError } from "../utils/AppError.js";
 
 export class UserService {
   constructor(private readonly userRepository: UserRepository) {}
@@ -21,7 +21,7 @@ export class UserService {
 
     const userRole = role ?? UserRole.ATENDENTE;
 
-    const user = await this.userRepository.create({
+    const user = this.userRepository.create({
       nome,
       email,
       senha: hashedPassword,

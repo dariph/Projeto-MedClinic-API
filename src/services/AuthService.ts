@@ -1,20 +1,15 @@
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt, { type SignOptions } from "jsonwebtoken";
 import { z } from "zod";
 
+import type { AuthResponseDTO, LoginDTO } from "../dtos/UserDTO.js";
 import { UserRole } from "../entities/User.js";
 import { UserRepository } from "../repositories/UserRepository.js";
 import { AppError } from "../utils/AppError.js";
 import { getEnvVar } from "../utils/env.js";
 
-import type {
-  AuthResponseDTO,
-  LoginDTO,
-  UserResponseDTO,
-} from "../dtos/UserDTO.js";
-
 const tokenPayloadSchema = z.object({
-  id: z.string().uuid(),
+  id: z.uuid(),
   role: z.enum(UserRole),
 });
 
@@ -42,7 +37,7 @@ export class AuthService {
     }
 
     const expiresIn: NonNullable<SignOptions["expiresIn"]> =
-      (process.env.JWT_EXPIRES_IN as SignOptions["expiresIn"]) || "1h";
+      (process.env.JWT_EXPIRES_IN as SignOptions["expiresIn"]) ?? "1h";
 
     const token = jwt.sign(
       {
@@ -59,7 +54,7 @@ export class AuthService {
 
     return {
       token,
-      user: userWithoutPassword as UserResponseDTO,
+      user: userWithoutPassword,
     };
   }
 

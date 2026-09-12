@@ -1,7 +1,6 @@
 import type { Request, Response } from "express";
 
 import type { CreateUserDTO, LoginDTO } from "../dtos/UserDTO.js";
-
 import { AuthService } from "../services/AuthService.js";
 import { UserService } from "../services/UserService.js";
 

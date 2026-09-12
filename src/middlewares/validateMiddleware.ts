@@ -11,7 +11,7 @@ export function validate(schema: ZodType) {
   ): Promise<void> => {
     try {
       await schema.parseAsync({
-        body: req.body,
+        body: req.body as unknown,
         query: req.query,
         params: req.params,
       });

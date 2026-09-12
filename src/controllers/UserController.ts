@@ -16,7 +16,7 @@ export class UserController {
     return res.json(user);
   }
 
-  async adminPing(req: Request, res: Response): Promise<Response> {
+  adminPing(req: Request, res: Response): Response {
     return res.json({
       message: "Ping do Administrador bem-sucedido!",
     });
