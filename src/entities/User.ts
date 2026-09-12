@@ -30,6 +30,7 @@ export class User {
 
   @Column({
     type: "varchar",
+    select: false,
   })
   senha!: string;
 
