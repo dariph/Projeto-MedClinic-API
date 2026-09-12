@@ -104,18 +104,22 @@ psql --version
 # 📁 5. Estrutura do projeto
 
 ```text
-medclinic-api/
+Projeto-MedClinic-API/
 │
 ├── src/
+│   │
+│   ├── @types/
+│   │   └── express/
+│   │       └── index.d.ts
 │   │
 │   ├── controllers/
 │   │   ├── AuthController.ts
 │   │   └── UserController.ts
 │   │
 │   ├── database/
-│   │   ├── data-source.ts
-│   │   └── migrations/
-│   │       └── 1710000000000-CreateUsersTable.ts
+│   │   ├── migrations/
+│   │   │   └── 1710000000000-CreateUsersTable.ts
+│   │   └── data-source.ts
 │   │
 │   ├── dtos/
 │   │   └── UserDTO.ts
@@ -126,6 +130,7 @@ medclinic-api/
 │   ├── middlewares/
 │   │   ├── authMiddleware.ts
 │   │   ├── errorMiddleware.ts
+│   │   ├── rateLimiter.ts
 │   │   ├── roleMiddleware.ts
 │   │   └── validateMiddleware.ts
 │   │
@@ -151,7 +156,9 @@ medclinic-api/
 ├── .env
 ├── .env.example
 ├── .gitignore
-├── medclinic.http
+├── .prettierrc
+├── api.rest
+├── eslint.config.mjs
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -333,13 +340,13 @@ O arquivo que deve ser enviado ao GitHub é:
 Clone o projeto:
 
 ```bash
-git clone URL_DO_REPOSITORIO
+git https://github.com/dariph/Projeto-MedClinic-API.git
 ```
 
 Entre na pasta:
 
 ```bash
-cd medclinic-api
+cd Projeto-MedClinic-API
 ```
 
 Instale as dependências:
@@ -981,7 +988,7 @@ Depois execute as requisições protegidas.
 
 As principais medidas de segurança implementadas são:
 
-- senhas protegidas por `bcrypt`;
+- senhas protegidas por `bcryptjs`;
 - autenticação por JWT;
 - JWT com tempo de expiração;
 - segredo JWT armazenado em variável de ambiente;
