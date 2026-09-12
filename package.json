@@ -1,0 +1,46 @@
+{
+  "name": "Projeto-MedClinic-API",
+  "version": "1.0.0",
+  "description": "API REST da MedClinic - Etapa 1: autenticação e autorização",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "typeorm": "tsx ./node_modules/typeorm/cli.js",
+    "migration:generate": "npm run typeorm -- migration:generate -d src/database/data-source.ts",
+    "migration:run": "npm run typeorm -- migration:run -d src/database/data-source.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d src/database/data-source.ts"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "typescript",
+    "typeorm",
+    "postgresql",
+    "jwt",
+    "rbac"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.5.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.0",
+    "typeorm": "^0.3.31",
+    "zod": "^4.6.2"
+  }
+}
