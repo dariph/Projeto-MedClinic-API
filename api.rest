@@ -1,7 +1,6 @@
 ##http =
 @baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM0Mzg3ZDQ5LWQ2YTQtNGY3ZS04Y2JhLWIzYTc5YWIyYmE4ZiIsInJvbGUiOiJBZG1pbmlzdHJhZG9yIiwiaWF0IjoxNzg5MjI2MTYyLCJleHAiOjE3ODkyMjk3NjJ9.-pSSPQDoxNREZAcubn-_iXl_NKD0i9P4K-XvB5SJp84
-
+@token = 
 ## COLE_AQUI_NO_TOKEN_GERADO_NO_LOGIN
 ### =========================================================
 ### Cadastro de usuário
