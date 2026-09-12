@@ -1,8 +1,10 @@
 import "reflect-metadata";
 import "express-async-errors";
 
+import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
+import helmet from "helmet";
 
 import { AppDataSource } from "./database/data-source.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js";
@@ -11,6 +13,10 @@ import { router } from "./routes/routes.js";
 dotenv.config();
 
 const app = express();
+
+app.use(helmet());
+
+app.use(cors());
 
 app.use(express.json());
 
@@ -27,7 +33,7 @@ async function startServer(): Promise<void> {
     console.log("Banco de dados PostgreSQL conectado com sucesso!");
 
     app.listen(PORT, () => {
-      console.log(`Servidor rodando na porta ${PORT}`);
+      console.log(`Servidor rodando na porta ${String(PORT)}`);
     });
   } catch (error) {
     console.error("Erro ao conectar no banco de dados:", error);
@@ -36,4 +42,4 @@ async function startServer(): Promise<void> {
   }
 }
 
-startServer();
+void startServer();

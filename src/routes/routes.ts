@@ -2,19 +2,14 @@ import { Router } from "express";
 
 import { AuthController } from "../controllers/AuthController.js";
 import { UserController } from "../controllers/UserController.js";
-
 import { UserRole } from "../entities/User.js";
-
 import { createAuthMiddleware } from "../middlewares/authMiddleware.js";
 import { roleMiddleware } from "../middlewares/roleMiddleware.js";
 import { validate } from "../middlewares/validateMiddleware.js";
-
 import { UserRepository } from "../repositories/UserRepository.js";
-
+import { createUserSchema, loginSchema } from "../schemas/userSchema.js";
 import { AuthService } from "../services/AuthService.js";
 import { UserService } from "../services/UserService.js";
-
-import { createUserSchema, loginSchema } from "../schemas/userSchema.js";
 
 const router = Router();
 
