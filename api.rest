@@ -1,0 +1,123 @@
+##http =
+@baseUrl = http://localhost:3000
+@token = 
+## COLE_AQUI_NO_TOKEN_GERADO_NO_LOGIN
+### =========================================================
+### Cadastro de usuário
+### =========================================================
+
+### Criar administrador
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "nome": "Administrador Teste",
+  "email": "admin@medclinic.com",
+  "senha": "Admin123",
+  "role": "Administrador"
+}
+
+### Criar atendente
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "nome": "Atendente Teste",
+  "email": "atendente@medclinic.com",
+  "senha": "Atendente123",
+  "role": "Atendente"
+}
+
+### =========================================================
+### Login e JWT
+### =========================================================
+
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@medclinic.com",
+  "senha": "Admin123"
+}
+
+### =========================================================
+### Usuário autenticado
+### Cole manualmente o token retornado pelo login em @token
+### =========================================================
+
+GET {{baseUrl}}/users/me
+Authorization: Bearer {{token}}
+
+### =========================================================
+### Endpoint exclusivo do administrador
+### =========================================================
+
+GET {{baseUrl}}/admin/ping
+Authorization: Bearer {{token}}
+
+### =========================================================
+### TESTE NEGATIVO - Sem token
+### Esperado: HTTP 401
+### =========================================================
+
+GET {{baseUrl}}/users/me
+
+### =========================================================
+### TESTE NEGATIVO - Token inválido
+### Esperado: HTTP 401
+### =========================================================
+
+GET {{baseUrl}}/users/me
+Authorization: Bearer token-invalido
+
+### =========================================================
+### TESTE NEGATIVO - Atendente acessando rota ADMIN
+### Use o token do atendente em @token
+### Esperado: HTTP 403
+### =========================================================
+
+GET {{baseUrl}}/admin/ping
+Authorization: Bearer {{token}}
+
+### =========================================================
+### TESTE NEGATIVO - E-mail duplicado
+### Esperado: HTTP 409
+### =========================================================
+
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "nome": "Administrador Duplicado",
+  "email": "admin@medclinic.com",
+  "senha": "Admin123",
+  "role": "Administrador"
+}
+
+### =========================================================
+### TESTE NEGATIVO - Senha inválida
+### Esperado: HTTP 400
+### =========================================================
+
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "nome": "Usuário Inválido",
+  "email": "invalido@medclinic.com",
+  "senha": "123",
+  "role": "Atendente"
+}
+
+### =========================================================
+### TESTE NEGATIVO - Credenciais inválidas
+### Esperado: HTTP 401
+### =========================================================
+
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@medclinic.com",
+  "senha": "senha-errada"
+}
