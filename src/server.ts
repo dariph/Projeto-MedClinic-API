@@ -1,0 +1,39 @@
+import "reflect-metadata";
+import "express-async-errors";
+
+import dotenv from "dotenv";
+import express from "express";
+
+import { AppDataSource } from "./database/data-source.js";
+import { errorMiddleware } from "./middlewares/errorMiddleware.js";
+import { router } from "./routes/routes.js";
+
+dotenv.config();
+
+const app = express();
+
+app.use(express.json());
+
+app.use(router);
+
+app.use(errorMiddleware);
+
+const PORT = Number(process.env.PORT) || 3000;
+
+async function startServer(): Promise<void> {
+  try {
+    await AppDataSource.initialize();
+
+    console.log("Banco de dados PostgreSQL conectado com sucesso!");
+
+    app.listen(PORT, () => {
+      console.log(`Servidor rodando na porta ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Erro ao conectar no banco de dados:", error);
+
+    process.exit(1);
+  }
+}
+
+startServer();
